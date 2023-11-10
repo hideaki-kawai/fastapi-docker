@@ -1,0 +1,33 @@
+{
+    "name": "fastapi",
+    "service": "app",
+    "workspaceFolder": "/src",
+    "dockerComposeFile": "../docker-compose.yml",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-python.python",
+                "ms-azuretools.vscode-docker",
+                "ms-python.vscode-pylance",
+                "formulahendry.auto-close-tag",
+                "formulahendry.auto-rename-tag",
+                "eg2.vscode-npm-script",
+                "redhat.vscode-yaml"
+            ],
+            "settings": {
+                "python.pythonPath": "/usr/local/bin/python", // Python インタープリタのパスを適切なものに置き換えてください
+                "python.linting.enabled": true,
+                "python.linting.pylintEnabled": true,
+                "python.formatting.autopep8Path": "/usr/local/bin/autopep8",
+                "python.formatting.blackPath": "/usr/local/bin/black",
+                "python.formatting.yapfPath": "/usr/local/bin/yapf",
+                "python.linting.flake8Path": "/usr/local/bin/flake8",
+                "editor.formatOnSave": true,
+                "editor.codeActionsOnSave": {
+                    "source.fixAll": true,
+                    "source.organizeImports": true
+                }
+            }
+        }
+    }
+}

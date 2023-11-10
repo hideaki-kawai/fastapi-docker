@@ -1,0 +1,25 @@
+services:
+  app:
+    build: .
+    volumes:
+      - .dockervenv:/src/.venv
+      - .:/src
+    ports:
+      - 8000:8000
+    environment:
+      - WATCHFILES_FORCE_POLLING=true # 環境によってホットリロードのために必要
+    depends_on:
+      - db
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes" # rootアカウントのパスワードはなし
+      MYSQL_DATABASE: "demo" # 初期データベースとしてdemoを設定
+      TZ: "Asia/Tokyo"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    command: --default-authentication-plugin=mysql_native_password # MySQL8.0ではデフォルトが"cashing_sha2_password"で、ドライバが非対応のため変更
+    ports:
+      - 3306:3306
+volumes:
+  mysql_data:

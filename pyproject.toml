@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "app"
+version = "0.1.0"
+description = ""
+authors = ["hkawai <h.kawai.tech@gmail.com>"]
+readme = "README.md"
+packages = [{include = "app"}]
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.91.0"
+uvicorn = {extras = ["standard"], version = "^0.20.0"}
+sqlalchemy = "^2.0.23"
+pymysql = "^1.1.0"
+pandas = {version = "^2.1.2", python = ">=3.11,<3.13"}
+
+[tool.poetry.dev-dependencies]
+pytest = "^5.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
