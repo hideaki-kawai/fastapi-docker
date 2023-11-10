@@ -7,8 +7,8 @@ while ! nc -z db 3306; do
 done
 echo "DB is ready!"
 
-# マイグレーション実行
+# マイグレーションを実行
 poetry run python -m api.migrate_db
 
-# アプリケーションの起動
+# uvicornを起動
 exec poetry run uvicorn api.main:app --host 0.0.0.0 --reload
