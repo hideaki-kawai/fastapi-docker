@@ -13,6 +13,7 @@ uvicorn = {extras = ["standard"], version = "^0.20.0"}
 sqlalchemy = "^2.0.23"
 pymysql = "^1.1.0"
 pandas = {version = "^2.1.2", python = ">=3.11,<3.13"}
+aiomysql = "^0.2.0"
 
 [tool.poetry.dev-dependencies]
 pytest = "^5.2"
