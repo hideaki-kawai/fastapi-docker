@@ -5,6 +5,8 @@ class TaskBase(BaseModel):
     title: str | None = Field(
         None, example="クリーニングを取りに行く")
 
+ # TaskBaseを継承
+
 
 class TaskRequest(TaskBase):
     pass
