@@ -40,14 +40,14 @@ async def async_client() -> AsyncClient:
 async def test_create_and_read(async_client):
     # create
     response = await async_client.post("/tasks", json={"title": "テストタスク"})
-    assert response.status == starlette.status.HTTP_200_OK
+    assert response.status_code == starlette.status.HTTP_200_OK
 
     response_obj = response.json()
     assert response_obj["title"] == "テストタスク"
 
     # read
     response = await async_client.get("/tasks")
-    assert response.status == starlette.status.HTTP_200_OK
+    assert response.status_code == starlette.status.HTTP_200_OK
 
     response_obj = response.json()
     assert len(response_obj) == 1
@@ -58,23 +58,23 @@ async def test_create_and_read(async_client):
 @pytest.mark.asyncio
 async def test_done_flag(async_client):
     response = await async_client.post("/tasks", json={"title": "テストタスク2"})
-    assert response.status == starlette.status.HTTP_200_OK
+    assert response.status_code == starlette.status.HTTP_200_OK
 
     response_obj = response.json()
     assert response_obj["title"] == "テストタスク2"
 
     # 完了フラグを立てる
-    response = await async_client.put("task/1/done")
-    assert response.status == starlette.status.HTTP_200_OK
+    response = await async_client.put("/done/1")
+    assert response.status_code == starlette.status.HTTP_200_OK
 
     # すでに完了フラグが立っているので400を返却
-    response = await async_client.put("task/1/done")
-    assert response.status == starlette.status.HTTP_400_BAD_REQUEST
+    response = await async_client.put("/done/1")
+    assert response.status_code == starlette.status.HTTP_400_BAD_REQUEST
 
     # 完了フラグを外す
-    response = await async_client.delete("task/1/done")
-    assert response.status == starlette.status.HTTP_200_OK
+    response = await async_client.delete("/done/1")
+    assert response.status_code == starlette.status.HTTP_200_OK
 
     # すでに完了フラグが立っているので404を返却
-    response = await async_client.delete("task/1/done")
-    assert response.status == starlette.status.HTTP_404_NOT_FOUND
+    response = await async_client.delete("/done/1")
+    assert response.status_code == starlette.status.HTTP_404_NOT_FOUND

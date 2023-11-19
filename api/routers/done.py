@@ -9,7 +9,7 @@ from api.db import get_db
 router = APIRouter()
 
 
-@router.put("/done/{task_id}/done", response_model=done_schema.DoneResponse)
+@router.put("/done/{task_id}", response_model=done_schema.DoneResponse)
 async def mark_task_as_done(task_id: int, db: AsyncSession = Depends(get_db)):
     done = await done_crud.get_done(db, task_id=task_id)
     if done is not None:
@@ -18,7 +18,7 @@ async def mark_task_as_done(task_id: int, db: AsyncSession = Depends(get_db)):
     return await done_crud.create_done(db, task_id)
 
 
-@router.delete("/done/{task_id}/done", response_model=None)
+@router.delete("/done/{task_id}", response_model=None)
 async def unmark_task_as_done(task_id: int, db: AsyncSession = Depends(get_db)):
     done = await done_crud.get_done(db, task_id=task_id)
     if done is None:
