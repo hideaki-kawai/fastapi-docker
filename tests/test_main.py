@@ -28,6 +28,7 @@ async def async_client() -> AsyncClient:
         async with async_session() as session:
             yield session
 
+    # productionコードでDIしているget_dbをget_test_dbにオーバーライド
     app.dependency_overrides[get_db] = get_test_db
 
     # テスト用に非同期HTTPクライアントを返却
